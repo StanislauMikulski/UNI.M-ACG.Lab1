@@ -59,8 +59,8 @@ int main(){
             255
         );
 
-        int prev_x = WIDTH/2;
-        int prev_y = HEIGHT/2;
+        int prev_x, center_x = WIDTH/2;
+        int prev_y, center_y = HEIGHT/2;
 
         for (double f = 0; f <= f_max; f += df){
             double p = a * f;
@@ -77,6 +77,43 @@ int main(){
 
             prev_x = x;
             prev_y = y;
+        }
+
+        SDL_SetRenderDrawColor(
+            renderer,
+            255,
+            0,
+            0,
+            255
+        );
+        SDL_RenderDrawLine(
+            renderer,
+            center_x,
+            center_y,
+            prev_x,
+            prev_y
+        );
+
+        SDL_SetRenderDrawColor(
+            renderer,
+            0,
+            255,
+            0,
+            255
+        );
+        for (double f = 0; f <= f_max; f += df){
+            double neg_f = -f;
+            double p = a * f;
+            int x = (WIDTH/2) + static_cast<int>(p * cos(neg_f));
+            int y = (HEIGHT/2) - static_cast<int>(p * sin(neg_f));
+
+            SDL_Rect dot = {
+                x - 1,
+                y - 1,
+                2,
+                2
+            };
+            SDL_RenderFillRect(renderer, &dot);
         }
 
         SDL_RenderPresent(renderer);
