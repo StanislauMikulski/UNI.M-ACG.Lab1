@@ -2,8 +2,8 @@
 #include <SDL2/SDL.h>
 #include <cmath>
 
-const int WIDTH = 1920;
-const int HEIGHT = 1080;
+const int WIDTH = 800;
+const int HEIGHT = 600;
 double f_max = 2.0 * 5 * M_PI;
 double a = std::min(WIDTH,HEIGHT)/(2.5*f_max); 
 double df = 0.05;
@@ -101,7 +101,7 @@ int main(){
             0,
             255
         );
-        for (double f = 0; f <= f_max; f += df){
+        for (double f = df; f <= f_max; f += df){
             double neg_f = -f;
             double p = a * f;
             int x = (WIDTH/2) + static_cast<int>(p * cos(neg_f));
